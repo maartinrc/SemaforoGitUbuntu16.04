@@ -6,9 +6,12 @@
 #define led_amarillo_auto 6
 #define led_rojo_auto 7
 
+#define boton_peaton A1
 
 #define pinEntrada A0
 
+
+boolean bandera =false;
 
 void setup(){
 
@@ -21,7 +24,7 @@ void setup(){
   pinMode(led_amarillo_auto,OUTPUT);
   pinMode(led_rojo_auto,OUTPUT);
 
-
+  pinMode(boton_peaton,INPUT);
 
   inicia();
 
@@ -30,6 +33,12 @@ void setup(){
 
 void loop(){
 
+  if(digitalRead(pinEntrada) == HIGH){//cambie low por high
+    bandera = true;
+
+  }
+
+  if(bandera){
     for(int i = 0 ; i < 4; i++){
       delay(500);
       digitalWrite(led_verde_auto,LOW);
@@ -54,7 +63,6 @@ void loop(){
     digitalWrite(led_verde_peaton,HIGH);
 
 
-
     for(int i = 0; i<4; i++){
       digitalWrite(led_rojo_auto,LOW);
       digitalWrite(led_verde_peaton,LOW);
@@ -75,9 +83,9 @@ void loop(){
       delay(500);
     }
 
-  
+    bandera=false; 
     inicia();
-
+  }
 
 
 }
