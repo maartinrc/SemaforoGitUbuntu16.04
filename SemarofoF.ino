@@ -10,6 +10,10 @@
 
 #define pinEntrada A0
 
+#define pot A3
+int valorPot= 0 ;
+float tiempo = 0;
+
 
 boolean bandera =false;
 
@@ -32,7 +36,7 @@ void setup(){
 }
 
 void loop(){
-
+*
   if(digitalRead(pinEntrada) == HIGH){//cambie low por high
     bandera = true;
 
@@ -62,6 +66,20 @@ void loop(){
     digitalWrite(led_rojo_auto,HIGH);
     digitalWrite(led_verde_peaton,HIGH);
 
+    //digitalWrite(led_verde_peaton,HIGH);
+    valorPot = analogRead(pot);
+    if(valorPot<1000 && valorPot >500){
+      valorPot = 7000;
+    }
+    else if(valorPot>1000){
+      valorPot = 10000;
+    }
+    else{
+      valorPot = 3000; 
+    }
+
+    delay(valorPot);
+
 
     for(int i = 0; i<4; i++){
       digitalWrite(led_rojo_auto,LOW);
@@ -83,9 +101,9 @@ void loop(){
       delay(500);
     }
 
-    bandera=false; 
+   bandera=false; 
     inicia();
-  }
+ }
 
 
 }
